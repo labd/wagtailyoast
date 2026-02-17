@@ -1,4 +1,4 @@
-include *.rst
+include *.md
 include AUTHORS
 include LICENSE
 recursive-include wagtailyoast/templates *.html
