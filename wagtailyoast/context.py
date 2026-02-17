@@ -1,6 +1,6 @@
 import os
 import json
-import pkg_resources
+from importlib.metadata import version, PackageNotFoundError
 from django.conf import settings
 
 # =======================================
@@ -8,13 +8,13 @@ from django.conf import settings
 # =======================================
 
 try:
-    #  Production part
-    VERSION = pkg_resources.get_distribution("wagtailyoast").version
-except pkg_resources.DistributionNotFound:
+    #  Production part
+    VERSION = version("wagtailyoast")
+except PackageNotFoundError:
     #  Develop part
-    with open(os.path.join(settings.BASE_DIR, 'package.json')) as package:
+    with open(os.path.join(settings.BASE_DIR, "package.json")) as package:
         data = json.load(package)
-        VERSION = data['version']
+        VERSION = data["version"]
 
 LOCALE = settings.WY_LOCALE
 STATIC_URL = settings.STATIC_URL
